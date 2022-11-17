@@ -1,0 +1,49 @@
+project:
+  version: 1.0
+
+gateway:
+  url: http://localhost:9001/api
+
+
+spring:
+  application:
+    name: doctor alert Service
+
+  profiles:
+    active: local-dev
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: doctorAlertDB
+      username: admin
+      password: admin
+      authentication-database: doctorAlertDB
+      connectTimeout: 10000
+      socketTimeout: 10000
+      heartbeatConnectTimeout: 10000
+      heartbeatSocketTimeout: 10000
+      serverSelectionTimeout: 10000
+      primaryOnly: true
+      replicaSet: false 
+      
+
+logging:
+  pattern:
+    file: "[%date{ISO8601}] logLevel=%level pid=${PID:-} thread=%thread service=${springAppName:-} trace=%X{X-B3-TraceId:-} span=%X{X-B3-SpanId:-} parent=%X{X-B3-ParentSpanId:-} class=%logger{40} %msg%n"
+  level:
+    '[org.springframework]': INFO
+    '[com.bits.assignment]': INFO
+  file:
+    name: ./application.log
+    max-history: 5
+    max-size: 100MB
+
+server:
+  port: 9006
+  servlet:
+    contextPath: /doctor-alert-service/
+  max-http-header-size: 200000
+  
+
