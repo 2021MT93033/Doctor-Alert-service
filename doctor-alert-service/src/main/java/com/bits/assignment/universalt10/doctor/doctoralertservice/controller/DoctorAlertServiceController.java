@@ -6,6 +6,8 @@ package com.bits.assignment.universalt10.doctor.doctoralertservice.controller;
 import java.util.List;
 
 import org.apache.logging.log4j.message.SimpleMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +31,8 @@ public class DoctorAlertServiceController {
 
 	@Autowired
 	private DoctorAlertService service;
+
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@GetMapping("/health")
 	public ResponseEntity<?> getHealthOfTheService() {
@@ -104,6 +108,6 @@ public class DoctorAlertServiceController {
 	@DeleteMapping("/patientRecord/{id}")
 	public ResponseEntity<?> deletePatientReport(@PathVariable String id) throws Exception {
 		service.deletePatientReport(id);
-		return (ResponseEntity<?>) ResponseEntity.noContent();
+		return ResponseEntity.noContent().build();
 	}
 }
